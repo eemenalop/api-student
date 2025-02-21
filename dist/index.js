@@ -19,6 +19,7 @@ app.get('/', (req, res) => {
             <li>/getByName?name=</li>
             <li>/createStudent</li>
             <li>/deleteStudent/:id</li>
+            <li>/updateStudentName/:id</li>
         </ul>`);
 });
 let students = [
@@ -78,6 +79,7 @@ app.post('/createStudent', (req, res) => {
         res.status(500).json({ msj: `There was an error in the request` });
     }
 });
+// deleteStudent
 app.put('/deleteStudent/:id', (req, res) => {
     try {
         const studentId = parseInt(req.params.id);
@@ -88,6 +90,22 @@ app.put('/deleteStudent/:id', (req, res) => {
         }
         student.active = false;
         res.json({ msj: `Student with id ${studentId} have been deleted` });
+    }
+    catch (_a) {
+        res.status(500).json({ msj: `There was an error in the request` });
+    }
+});
+// updateStudentName
+app.put('/updateStudentName/:id', (req, res) => {
+    try {
+        const studentId = parseInt(req.params.id);
+        const student = students.find((s) => s.id === studentId);
+        if (!student) {
+            res.status(400).json({ msj: 'Student not found' });
+            return;
+        }
+        student.name = req.body.name;
+        res.json({ msj: `Change student name with id ${studentId} to ${student.name}` });
     }
     catch (_a) {
         res.status(500).json({ msj: `There was an error in the request` });
