@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
     res.send(`<h1>Students Edgar's API</h1>
         <h3>Already existing Endpoints:<h3>
         <ul>
-            <li>/students</li>
+            <li>/getAllStudents</li>
             <li>/getById?id=</li>
             <li>/getByName?name=</li>
             <li>/createStudent</li>
