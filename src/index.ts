@@ -18,6 +18,7 @@ app.get('/', (req: Request, res: Response)=>{
             <li>/getById?id=</li>
             <li>/getByName?name=</li>
             <li>/createStudent</li>
+            <li>/deleteStudent/:id</li>
         </ul>`);
 });
 
@@ -63,7 +64,7 @@ app.get('/getById', (req: Request, res: Response)=>{
 
 app.get('/getByName', (req: Request, res: Response)=>{
     const name = req.query.name;
-    const student = students.find((element) => element.name.toLocaleLowerCase() === name);
+    const student = students.find((element) => element.name === name);
 
     if(!student){
         res.status(404).json({msj: `Student by name ${name} not found`})
@@ -87,7 +88,7 @@ app.post('/createStudent', (req: Request, res: Response)=>{
         const studetExists = students.some((student)=> student.name.toLowerCase() === name.toLowerCase())
     
         if (studetExists){
-            res.status(400).json({msj: `Student ${name} already exists`});
+            res.status(400).json({msj: `Student ${name} already exists. Enter other name.`});
             return;
         }
         
@@ -111,7 +112,7 @@ app.put('/deleteStudent/:id', (req: Request, res: Response)=>{
         }
         student.active = false;
 
-        res.json({msj: `Student with id ${studentId} have been inactivated`})
+        res.json({msj: `Student with id ${studentId} have been deleted`})
 
     }catch{
         res.status(500).json({msj: `There was an error in the request`})
