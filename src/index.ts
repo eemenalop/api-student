@@ -36,7 +36,8 @@ let students: Students[] = [
 /// get All Students
 
 app.get('/getAllStudents', (req: Request, res: Response)=>{
-    res.json({students})
+    const activeStudents = students.filter((student)=> student.active === true);
+    res.json({activeStudents});
 })
 
 // getById
@@ -101,11 +102,19 @@ app.post('/createStudent', (req: Request, res: Response)=>{
 
 app.put('/deleteStudent/:id', (req: Request, res: Response)=>{
     try{
-        const {id} = req.params;
-        
+        const studentId = parseInt(req.params.id);
+        const student = students.find((s)=> s.id === studentId);
+
+        if(!student){
+            res.status(400).json({msj: 'Student not found'});
+            return;
+        }
+        student.active = false;
+
+        res.json({msj: `Student with id ${studentId} have been inactivated`})
 
     }catch{
-
+        res.status(500).json({msj: `There was an error in the request`})
     }
 });
 
