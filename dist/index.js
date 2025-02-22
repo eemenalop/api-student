@@ -80,7 +80,7 @@ app.post('/createStudent', (req, res) => {
     }
 });
 // deleteStudent
-app.put('/deleteStudent/:id', (req, res) => {
+app.patch('/deleteStudent/:id', (req, res) => {
     try {
         const studentId = parseInt(req.params.id);
         const student = students.find((s) => s.id === studentId);
@@ -96,7 +96,7 @@ app.put('/deleteStudent/:id', (req, res) => {
     }
 });
 // updateStudentName
-app.put('/updateStudentName/:id', (req, res) => {
+app.patch('/updateStudentName/:id', (req, res) => {
     try {
         const studentId = parseInt(req.params.id);
         const student = students.find((s) => s.id === studentId);

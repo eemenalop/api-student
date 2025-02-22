@@ -104,7 +104,7 @@ app.post('/createStudent', (req: Request, res: Response)=>{
 
 // deleteStudent
 
-app.put('/deleteStudent/:id', (req: Request, res: Response)=>{
+app.patch('/deleteStudent/:id', (req: Request, res: Response)=>{
     try{
         const studentId = parseInt(req.params.id);
         const student = students.find((s)=> s.id === studentId);
@@ -125,7 +125,7 @@ app.put('/deleteStudent/:id', (req: Request, res: Response)=>{
 
 // updateStudentName
 
-app.put('/updateStudentName/:id', (req: Request, res: Response) => {
+app.patch('/updateStudentName/:id', (req: Request, res: Response) => {
     try {
         const studentId = parseInt(req.params.id);
         const student = students.find((s) => s.id === studentId);
